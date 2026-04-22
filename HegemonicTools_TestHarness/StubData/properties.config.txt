@@ -1,0 +1,15 @@
+#################### Logger Settings ####################
+logger.logWarning = 1
+logger.logInfo = 1
+logger.logDebug = 0
+logger.logTrace = 1
+
+#################### Application Settings ####################
+application.rendererFrequencyHz = 600
+application.applicationFrequencyHz = 60
+
+#################### Renderer Settings ####################
+renderer.layerOverlayCount = 2
+renderer.layerObjectCount = 5
+renderer.maxObjectCount = 1024
+renderer.reserveTextureCount = 1000
