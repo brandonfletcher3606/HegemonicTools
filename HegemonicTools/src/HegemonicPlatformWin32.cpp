@@ -1,6 +1,6 @@
 #include <cstring>
 
-#include "defines.h"
+#include "HegemonicToolsDefines.h"
 #include "HegemonicLogger.h"
 #include "HegemonicPlatform.h"
 #include "HegemonicWindowStructures.h"

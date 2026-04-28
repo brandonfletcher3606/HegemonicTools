@@ -3,7 +3,7 @@
 #include <map>
 #include <string>
 
-#include "defines.h"
+#include "HegemonicToolsDefines.h"
 
 namespace Hegemonic
 {

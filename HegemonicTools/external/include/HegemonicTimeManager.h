@@ -3,48 +3,23 @@
 #include <chrono>
 #include <type_traits>
 
-#include "defines.h"
+#include "HegemonicToolsDefines.h"
 
 namespace Hegemonic
 {
-    class TimeManager
+    class HEXPORT TimeManager
     {
     public:
-        TimeManager() {mLastTime = mClock::now();};
+        TimeManager() = default;
         ~TimeManager() = default;
 
-        void setFrequency(std::size_t aFrequency) { mFrequency = aFrequency; mLastTime = mClock::now();};
+        void setFrequency(std::size_t aFrequency);
+        void update();
+        bool isPassTime();
+        bool updateAndPeek();
 
-        void update()
-        {
-            mClock::time_point currentTime = mClock::now();
-            double dt = std::chrono::duration_cast<std::chrono::microseconds>(currentTime - mLastTime).count();
-            
-            mRunningTime = dt/1000000.0;
-        }
-
-        bool isPassTime()
-        {
-            bool test = mRunningTime >= (1.0/static_cast<double>(mFrequency)) ? true : false;
-            if (test)
-            {
-                mLastRunningTime = mRunningTime;
-                mRunningTime = 0;
-                mLastTime = mClock::now();
-            }
-            return test;
-        }
-
-        bool updateAndPeek()
-        {
-            update();
-            return isPassTime();;
-        }
-
-        float getDt()
-        {
-            return static_cast<float>(mLastRunningTime);
-        }
+        float getDt();
+        float getFrequency();
 
     private:
         using mClock = std::conditional_t<std::chrono::high_resolution_clock::is_steady,
@@ -53,8 +28,8 @@ namespace Hegemonic
 
         mClock::time_point mLastTime = mClock::now();
         float mFrequency = 60;
-        bool mIsPassTime = false;
-        double mRunningTime = 0;
-        double mLastRunningTime = 0;
+        // bool mIsPassTime = false;
+        double mDt = 0;
+        double mRunningDt = 0;
     };
 }

@@ -12,31 +12,27 @@ namespace Hegemonic
 		debugBreak();
 	}
 
-	void Asserts::assert(bool aExpression)
+	void Asserts::assertion(bool aExpression)
 	{
 		const char* expression = aExpression ? "True" : "False";
 		reportFailure(expression, "", __FILE__, __LINE__);
 	}
 
-	void Asserts::assert(bool aExpression, const char* aMessage)
+	void Asserts::assertion(bool aExpression, const char* aMessage)
 	{
 		const char* expression = aExpression ? "True" : "False";
 		reportFailure(expression, aMessage, __FILE__, __LINE__);
 	}
 
-	void Asserts::assert(bool aExpression, std::string aMessage)
+	void Asserts::assertion(bool aExpression, std::string aMessage)
 	{
 		const char* expression = aExpression ? "True" : "False";
 		reportFailure(expression, aMessage.c_str(), __FILE__, __LINE__);
 	}
 
-	void Asserts::assert(bool aExpression, const char* aExpressionString, const char* aMessage, const char* aFileLocation, i32 aLineNumber)
+	void Asserts::assertion(bool aExpression, const char* aExpressionString, const char* aMessage, const char* aFileLocation, i32 aLineNumber)
 	{
-		if (aExpression)
-		{
-
-		}
-		else
+		if (!aExpression)
 		{
 			reportFailure(aExpressionString, aMessage, aFileLocation, aLineNumber);
 		}

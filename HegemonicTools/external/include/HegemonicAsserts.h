@@ -3,7 +3,7 @@
 #include <intrin.h>
 #include <string>
 
-#include "defines.h"
+#include "HegemonicToolsDefines.h"
 
 #define debugBreak() __debugbreak()
 
@@ -17,12 +17,12 @@ namespace Hegemonic
 	 * @param char* aFile - the file the error comes from
 	 * @param i32 aLine - the line aFile that causes the error
 	 */
-	void reportFailure(const char* aExpression, const char* aMessage, const char* aFile, i32 aLine);
+	void HEXPORT reportFailure(const char* aExpression, const char* aMessage, const char* aFile, i32 aLine);
 
 	/**
 	 * INFO: Asserts is responsible for holding the static calls to assert
 	 */
-	class Asserts
+	class HEXPORT Asserts
 	{
 	public:
 		/**
@@ -30,7 +30,7 @@ namespace Hegemonic
 		 * 
 		 * @param bool aExpression - the expression to be checked
 		 */
-		static void assert(bool aExpression);
+		static void assertion(bool aExpression);
 
 		/**
 		 * INFO: assert is responsible for checking an expression
@@ -38,7 +38,7 @@ namespace Hegemonic
 		 * @param bool aExpression - the expression to be checked
 		 * @param char* aMessage - message to be expressed if there is a failure
 		 */
-		static void assert(bool aExpression, const char* aMessage);
+		static void assertion(bool aExpression, const char* aMessage);
 
 		/**
 		 * INFO: assert is responsible for checking an expression
@@ -46,7 +46,7 @@ namespace Hegemonic
 		 * @param bool aExpression - the expression to be checked
 		 * @param std::string aMessage - message to be expressed if there is a failure
 		 */
-		static void assert(bool aExpression, std::string aMessage);
+		static void assertion(bool aExpression, std::string aMessage);
 
 		/**
 		 * INFO: assert is responsible for checking an expression
@@ -57,12 +57,18 @@ namespace Hegemonic
 		 * @param char* aFileLocation - the file the possible error comes from
 		 * @param i32 aLineNumber - the line number in aFileLocation the possible error comes from
 		 */
-		static void assert(bool aExpression, const char* aExpressionString, const char* aMessage, const char* aFileLocation, i32 aLineNumber);
+		static void assertion(bool aExpression, const char* aExpressionString, const char* aMessage, const char* aFileLocation, i32 aLineNumber);
 	};
 }
 
-#define HASSERT(aExpression) (Hegemonic::Asserts::assert(aExpression, #aExpression, "NONE", __FILE__, __LINE__))
-#define HASSERT_MSG(aExpression, aMessage) (Hegemonic::Asserts::assert(aExpression, #aExpression, aMessage, __FILE__, __LINE__))
+#ifdef NDEBUG
+	#define HASSERT(aExpression)  ((void)0)
+	#define HASSERT_MSG(aExpression, aMessage)  ((void)0)
+#else
+	#define HASSERT(aExpression) (Hegemonic::Asserts::assertion(aExpression, #aExpression, "NONE", __FILE__, __LINE__))
+	#define HASSERT_MSG(aExpression, aMessage) (Hegemonic::Asserts::assertion(aExpression, #aExpression, aMessage, __FILE__, __LINE__))
+#endif
+
 
 
 

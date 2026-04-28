@@ -1,6 +1,6 @@
 #pragma once
 
-#include "defines.h"
+#include "HegemonicToolsDefines.h"
 #include "HegemonicProperties.h"
 
 namespace Hegemonic

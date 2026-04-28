@@ -3,34 +3,13 @@
 #include <memory>
 #include <string>
 #include <utility>
+#include <unordered_map>
 
-#include "defines.h"
+#include "HegemonicToolsDefines.h"
 
 namespace Hegemonic
 {
-	enum MemoryTag
-	{
-		UNKNOWN,
-		ARENA,
-		APPLICATION,
-		USERAPPLICATION,
-		RENDERER,
-		WINDOW,
-		EVENTINTERFACE,
-		LOGINTERFACE,
-		VECTOR,
-		MEMORYTAGEND
-	};
-
-	struct MemoryStats
-	{
-		size_t totalAllocated = 0;
-		size_t taggedAllocations[MemoryTag::MEMORYTAGEND];
-	};
-
-	// template this to take enum template<enum MEMORY_SET>
-	// also move MemoryStats into MemoryTracker
-	class MemoryTracker
+	class HEXPORT MemoryTracker
 	{
 	public:
 		// singleton shouldn't be copyable
@@ -51,35 +30,37 @@ namespace Hegemonic
 			return *mMemoryTracker;
 		}
 
-		void incrimentUp(size_t aSize, MemoryTag aTag);
-		void incrimentDown(size_t aSize, MemoryTag aTag);
-		size_t getCount(MemoryTag aTag);
-		size_t getTotal();
+		void addTag(std::string aTag);
+		void incrimentUp(size_t aSize, std::string aTag);
+		void incrimentDown(size_t aSize, std::string aTag);
+		bool isTag(std::string aTag);
+		int getCount(std::string aTag);
+		int getTotal();
 
 	private:
 		static MemoryTracker* mMemoryTracker;
-		MemoryStats mMemoryStats = MemoryStats();
+		std::unordered_map<std::string, int> mData;
 
 		MemoryTracker() = default;
 	};
 
-	static std::string convertCountToString(size_t aSize)
-	{
-		const int kb = 1000;
-		const int mb = 1000 * kb;
-		const int gb = 1000 * mb;
-		if (aSize > gb)
-		{
-			return std::to_string(aSize / gb) + "GB";
-		}
-		else if (aSize > mb)
-		{
-			return std::to_string(aSize / mb) + "MB";
-		}
-		else if (aSize > kb)
-		{
-			return std::to_string(aSize / kb) + "KB";
-		}
-		return std::to_string(aSize) + "B";
-	}
+	// static std::string convertCountToString(size_t aSize)
+	// {
+	// 	const int kb = 1000;
+	// 	const int mb = 1000 * kb;
+	// 	const int gb = 1000 * mb;
+	// 	if (aSize > gb)
+	// 	{
+	// 		return std::to_string(aSize / gb) + "GB";
+	// 	}
+	// 	else if (aSize > mb)
+	// 	{
+	// 		return std::to_string(aSize / mb) + "MB";
+	// 	}
+	// 	else if (aSize > kb)
+	// 	{
+	// 		return std::to_string(aSize / kb) + "KB";
+	// 	}
+	// 	return std::to_string(aSize) + "B";
+	// }
 }

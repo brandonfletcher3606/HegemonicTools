@@ -3,7 +3,7 @@
 
 #include <vector>
 
-#include "defines.h"
+#include "HegemonicToolsDefines.h"
 
 namespace Hegemonic
 {

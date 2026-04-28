@@ -2,50 +2,59 @@
 #include <memory>
 
 #include "HegemonicMemory.h"
+#include "HegemonicLogger.h"
 
 namespace Hegemonic
 {
 	MemoryTracker* MemoryTracker::mMemoryTracker = nullptr;
 
-	void MemoryTracker::incrimentUp(size_t aSize, MemoryTag aTag)
+	void MemoryTracker::incrimentUp(size_t aSize, std::string aTag)
 	{
-		if (aTag == MemoryTag::MEMORYTAGEND)
+		if (!isTag(aTag))
 		{
-			aTag = MemoryTag::UNKNOWN;
+			Hegemonic::logWarning("MemoryTracker::incrimentUp string ", aTag, " is not a tag");
+			return;
 		}
-
-		mMemoryStats.taggedAllocations[aTag] += aSize;
-		mMemoryStats.totalAllocated += aSize;
+		mData[aTag] += aSize;
 	}
-
-	void MemoryTracker::incrimentDown(size_t aSize, MemoryTag aTag)
+	void MemoryTracker::incrimentDown(size_t aSize, std::string aTag)
 	{
-		if (aTag == MemoryTag::MEMORYTAGEND)
+		if (!isTag(aTag))
 		{
-			aTag = MemoryTag::UNKNOWN;
+			Hegemonic::logWarning("MemoryTracker::incrimentDown string ", aTag, " is not a tag");
+			return;
 		}
-
-		mMemoryStats.taggedAllocations[aTag] -= aSize;
-		mMemoryStats.totalAllocated -= aSize;
+		mData[aTag] -= aSize;
 	}
-
-	size_t MemoryTracker::getCount(MemoryTag aTag)
+	bool MemoryTracker::isTag(std::string aTag)
 	{
-		return mMemoryStats.taggedAllocations[aTag];
+		return mData.count(aTag) > 0;
 	}
-
-	size_t MemoryTracker::getTotal()
+	void MemoryTracker::addTag(std::string aTag)
 	{
-		size_t total = 0;
-		total += getCount(MemoryTag::UNKNOWN);
-		total += getCount(MemoryTag::APPLICATION);
-		total += getCount(MemoryTag::USERAPPLICATION);
-		total += getCount(MemoryTag::RENDERER);
-		total += getCount(MemoryTag::WINDOW);
-		total += getCount(MemoryTag::EVENTINTERFACE);
-		total += getCount(MemoryTag::LOGINTERFACE);
-		total += getCount(MemoryTag::VECTOR);
-		total += getCount(MemoryTag::ARENA);
+		if (isTag(aTag))
+		{
+			Hegemonic::logWarning("MemoryTracker::addTag string ", aTag, " is already a tag");
+			return;
+		}
+		mData[aTag] = 0;
+	}
+	int MemoryTracker::getCount(std::string aTag)
+	{
+		if (!isTag(aTag))
+		{
+			Hegemonic::logWarning("MemoryTracker::getCount string ", aTag, " is not a tag");
+			return 0;
+		}
+		return mData[aTag];
+	}
+	int MemoryTracker::getTotal()
+	{
+		int total = 0;
+		for (const auto& pair : mData) 
+		{
+			total += pair.second;
+		}
 		return total;
 	}
 }

@@ -2,25 +2,26 @@
 
 #include "HegemonicMemoryTracker.h"
 #include "HegemonicPlatform.h"
+#include "HegemonicToolsDefines.h"
 
 namespace Hegemonic
 {
     template<typename T>
-    T* memget(MemoryTag aTag)
+    T* memget(std::string aTag)
     {
         MemoryTracker::getInstance().incrimentUp(sizeof(T), aTag);
         return new T;
     }
 
     template<typename T, typename... Args>
-    T* memget(MemoryTag aTag, Args... aArgs)
+    T* memget(std::string aTag, Args... aArgs)
     {
         MemoryTracker::getInstance().incrimentUp(sizeof(T), aTag);
         return new T(std::forward<Args>(aArgs)...);
     }
 
     template<typename T>
-    void memgive(T* aMemory, MemoryTag aTag)
+    void memgive(T* aMemory, std::string aTag)
     {
         if (aMemory == nullptr)
         {
@@ -31,5 +32,5 @@ namespace Hegemonic
         delete aMemory;
     }
 
-    void* memzero(void* aBlock, u64 aSizeOf);
+    HEXPORT void* memzero(void* aBlock, u64 aSizeOf);
 }

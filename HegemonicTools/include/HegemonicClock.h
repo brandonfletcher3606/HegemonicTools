@@ -2,14 +2,15 @@
 
 #include <chrono>
 #include <type_traits>
+#include "HegemonicToolsDefines.h"
 
 namespace Hegemonic
 {
-    class Clock
+    class HEXPORT Clock
     {
     public:
-        void tic() { mStartTime = mClock::now(); };
-        double toc() { mEndTime = mClock::now(); return std::chrono::duration_cast<std::chrono::milliseconds>(mEndTime - mStartTime).count();};
+        void tic();
+        double toc();
 
     private:
         using mClock = std::conditional_t<std::chrono::high_resolution_clock::is_steady,

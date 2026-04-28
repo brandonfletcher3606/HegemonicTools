@@ -1,12 +1,13 @@
 #pragma once
 
 #include <iostream>
+#include <iomanip>
 #include <sstream>
 #include <string>
 #include <vector>
 
 #include "HegemonicPlatform.h"
-#include "defines.h"
+#include "HegemonicToolsDefines.h"
 
 namespace Hegemonic
 {
@@ -377,5 +378,7 @@ namespace Hegemonic
 	 * INFO: newLine is used to print an empty line to the console
 	 */
 	static void newLine() { std::cout << std::endl; };
+
+	static void setLoggingPrecision(size_t aPrecision) { std::cout << std::setprecision(aPrecision); };
 }
 
