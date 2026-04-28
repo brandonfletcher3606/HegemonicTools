@@ -1,9 +1,9 @@
 # folders
 build/
-HegemonicTools_TestHarness/googletest/*
+HegemonicTools_TestHarness/googletest/
 .vscode/
 /HegemonicTools.code-workspace
-HegemonicTools/external/*
+HegemonicTools/external/
 
 # Prerequisites
 *.d
