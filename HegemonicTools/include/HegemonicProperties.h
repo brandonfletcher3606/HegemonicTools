@@ -7,7 +7,7 @@
 
 namespace Hegemonic
 {
-    class HEXPORT Properties
+    class HEXPORT_TOOLS Properties
     {
 	private:
 		void validateProperty(std::string aProperty);

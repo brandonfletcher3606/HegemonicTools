@@ -7,11 +7,11 @@
 
 namespace Hegemonic
 {
-    HEXPORT void platformConsoleWrite(const char* aMessage, int aColor);
-    HEXPORT void platformConsoleWriteError(const char* aMessage, int aColor);  
-    HEXPORT void platformSleep(float aDt);
-    HEXPORT void platformGetExtensionNames(std::vector<const char*>& aExtensions);
-    HEXPORT bool platformIsHandle(void* aWindowState, void* aHandle2);
-    HEXPORT void* platformZeroMememory(void* aMemory, u64 aSize);
-    HEXPORT void platformSetCursorPosition(int aX, int aY);
+    HEXPORT_TOOLS void platformConsoleWrite(const char* aMessage, int aColor);
+    HEXPORT_TOOLS void platformConsoleWriteError(const char* aMessage, int aColor);  
+    HEXPORT_TOOLS void platformSleep(float aDt);
+    HEXPORT_TOOLS void platformGetExtensionNames(std::vector<const char*>& aExtensions);
+    HEXPORT_TOOLS bool platformIsHandle(void* aWindowState, void* aHandle2);
+    HEXPORT_TOOLS void* platformZeroMememory(void* aMemory, u64 aSize);
+    HEXPORT_TOOLS void platformSetCursorPosition(int aX, int aY);
 }

@@ -17,12 +17,12 @@ namespace Hegemonic
 	 * @param char* aFile - the file the error comes from
 	 * @param i32 aLine - the line aFile that causes the error
 	 */
-	void HEXPORT reportFailure(const char* aExpression, const char* aMessage, const char* aFile, i32 aLine);
+	void HEXPORT_TOOLS reportFailure(const char* aExpression, const char* aMessage, const char* aFile, i32 aLine);
 
 	/**
 	 * INFO: Asserts is responsible for holding the static calls to assert
 	 */
-	class HEXPORT Asserts
+	class HEXPORT_TOOLS Asserts
 	{
 	public:
 		/**

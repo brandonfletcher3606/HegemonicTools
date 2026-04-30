@@ -8,9 +8,9 @@
 	#define LINUX_PLATFORM 0
 	#define FILESEP "\\"
     #ifdef BUILDING_HEGEMONIC_TOOLS
-        #define HEXPORT __declspec(dllexport)
+        #define HEXPORT_TOOLS __declspec(dllexport)
     #else
-        #define HEXPORT __declspec(dllimport)
+        #define HEXPORT_TOOLS __declspec(dllimport)
     #endif
 #else
     // Linux/Unix logic
@@ -18,9 +18,9 @@
 	#define LINUX_PLATFORM 1
 	#define FILESEP "/"
     #if __GNUC__ >= 4
-        #define HEXPORT __attribute__((visibility("default")))
+        #define HEXPORT_TOOLS __attribute__((visibility("default")))
     #else
-        #define HEXPORT
+        #define HEXPORT_TOOLS
     #endif
 #endif
 
@@ -45,8 +45,6 @@ namespace Hegemonic
 	// boolean types
 	typedef int b32;
 	typedef char b8;
-
-	HEXPORT std::string getHegemonicToolsVersion();
 }
 
 #define INVALIDID 4294967295U

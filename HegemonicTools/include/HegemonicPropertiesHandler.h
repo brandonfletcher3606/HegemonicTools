@@ -5,7 +5,7 @@
 
 namespace Hegemonic
 {
-	class HEXPORT PropertiesHandler : public Properties
+	class HEXPORT_TOOLS PropertiesHandler : public Properties
 	{
 	private:
 		PropertiesHandler() = default;

@@ -32,5 +32,5 @@ namespace Hegemonic
         delete aMemory;
     }
 
-    HEXPORT void* memzero(void* aBlock, u64 aSizeOf);
+    HEXPORT_TOOLS void* memzero(void* aBlock, u64 aSizeOf);
 }

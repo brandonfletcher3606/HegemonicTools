@@ -9,7 +9,7 @@
 
 namespace Hegemonic
 {
-	class HEXPORT MemoryTracker
+	class HEXPORT_TOOLS MemoryTracker
 	{
 	public:
 		// singleton shouldn't be copyable

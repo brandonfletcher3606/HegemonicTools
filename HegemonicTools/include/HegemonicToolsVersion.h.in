@@ -1,3 +1,9 @@
 #pragma once
+#include <string>
 
 #define HEGEMONICTOOLS_VERSION "@PROJECT_VERSION@"
+
+namespace Hegemonic
+{
+    HEXPORT_TOOLS std::string getHegemonicToolsVersion();
+}

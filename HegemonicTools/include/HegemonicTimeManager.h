@@ -7,7 +7,7 @@
 
 namespace Hegemonic
 {
-    class HEXPORT TimeManager
+    class HEXPORT_TOOLS TimeManager
     {
     public:
         TimeManager() = default;

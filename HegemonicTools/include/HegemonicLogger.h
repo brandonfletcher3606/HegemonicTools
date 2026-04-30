@@ -22,7 +22,7 @@ namespace Hegemonic
 		TRACE
 	};
 
-	struct HEXPORT LogFileSettings
+	struct HEXPORT_TOOLS LogFileSettings
 	{
 		bool logToFile = true;
 		int storageAmount = 100;
@@ -30,7 +30,7 @@ namespace Hegemonic
 		std::string fileName = "HegemonicEngineLogFile.txt";
 	};
 
-	struct HEXPORT LogSettings
+	struct HEXPORT_TOOLS LogSettings
 	{
 		bool logInfo = true;
 		bool logDebug = true;
@@ -44,12 +44,12 @@ namespace Hegemonic
 	 * 
 	 * @param LogLevel aLogLevel - the level to convert to int
 	 */
-	HEXPORT int convertLogEnumToInt(const LogLevel aLogLevel);
+	HEXPORT_TOOLS int convertLogEnumToInt(const LogLevel aLogLevel);
 
 	/**
 	 * INFO: LogInterface is responsible for providing an interface to print log statements and create/print-to a logfile
 	 */
-	class HEXPORT LogInterface
+	class HEXPORT_TOOLS LogInterface
 	{
 	public:
 		// singleton shouldn't be copyable

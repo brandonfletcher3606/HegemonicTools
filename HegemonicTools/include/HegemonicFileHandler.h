@@ -7,7 +7,7 @@
 
 namespace Hegemonic
 {
-    class HEXPORT FileHandler
+    class HEXPORT_TOOLS FileHandler
     {
     public:
         static bool exists(std::string aFullPath);

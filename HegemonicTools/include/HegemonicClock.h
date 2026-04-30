@@ -6,7 +6,7 @@
 
 namespace Hegemonic
 {
-    class HEXPORT Clock
+    class HEXPORT_TOOLS Clock
     {
     public:
         void tic();

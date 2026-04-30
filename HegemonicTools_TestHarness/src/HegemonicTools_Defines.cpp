@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include <HegemonicToolsDefines.h>
+#include <HegemonicToolsVersion.h>
 
 TEST(Defines, VERSION)
 {
