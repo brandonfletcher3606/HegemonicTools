@@ -22,7 +22,7 @@ file(GLOB INC_FILES_HEGEMONIC_TOOLS_TH
 set_target_properties(HegemonicTools PROPERTIES
     IMPORTED_IMPLIB               "${PROJECT_SOURCE_DIR}/../HegemonicTools/external/lib/Debug/HegemonicTools.lib"
     IMPORTED_LOCATION             "${PROJECT_SOURCE_DIR}/../HegemonicTools/external/bin/Debug/HegemonicTools.dll"
-    INTERFACE_INCLUDE_DIRECTORIES "${PROJECT_SOURCE_DIR}/../HegemonicTools/external/include/"
+    INTERFACE_INCLUDE_DIRECTORIES "${PROJECT_SOURCE_DIR}/../HegemonicTools/include/"
 )
 
 # build Hegemonit Tools TH

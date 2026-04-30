@@ -36,4 +36,4 @@ target_include_directories(HegemonicTools
     PUBLIC ${PROJECT_SOURCE_DIR}/include/)
 
 # copy over files
-file(COPY ${PROJECT_SOURCE_DIR}/include/ DESTINATION ${PROJECT_SOURCE_DIR}/external/include/)
+#file(COPY ${PROJECT_SOURCE_DIR}/include/ DESTINATION ${PROJECT_SOURCE_DIR}/external/include/)
