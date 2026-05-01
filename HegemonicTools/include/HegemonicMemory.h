@@ -4,6 +4,8 @@
 #include "HegemonicPlatform.h"
 #include "HegemonicToolsDefines.h"
 
+#include <utility>
+
 namespace Hegemonic
 {
     template<typename T>
@@ -30,6 +32,18 @@ namespace Hegemonic
 
         MemoryTracker::getInstance().incrimentDown(sizeof(T), aTag);
         delete aMemory;
+    }
+
+    template<typename T, typename... Args>
+    std::unique_ptr<T> makeUnique(Args &&... args)
+    {
+        return std::unique_ptr<T>(new T(std::forward<Args>(args)...));
+    }
+
+    template<typename T, typename... Args>
+    std::unique_ptr<T> makeUnique(std::string aTag, Args &&... args)
+    {
+        return std::unique_ptr<T>(memget<T, Args>(aTag));
     }
 
     HEXPORT_TOOLS void* memzero(void* aBlock, u64 aSizeOf);
