@@ -1,0 +1,16 @@
+#pragma once
+
+#include "HegemonicArenaAllocator.h"
+#include "HegemonicAsserts.h"
+#include "HegemonicClock.h"
+#include "HegemonicFileHandler.h"
+#include "HegemonicLogger.h"
+#include "HegemonicMemory.h"
+#include "HegemonicMemoryTracker.h"
+#include "HegemonicPlatform.h"
+#include "HegemonicProperties.h"
+#include "HegemonicPropertiesHandler.h"
+#include "HegemonicTimeManager.h"
+#include "HegemonicToolsDefines.h"
+#include "HegemonicToolsVersion.h"
+#include "HegemonicWindowStructures.h"
