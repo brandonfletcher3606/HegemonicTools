@@ -100,6 +100,13 @@ namespace Hegemonic
 			nextLine();
 		}
 
+		template<typename Arg>
+		void logFatal(std::initializer_list<Arg> aList)
+		{
+			log(LogLevel::FATAL, aList);
+			nextLine();
+		}
+
 		/**
 		 * INFO: logError is responsible for passing passing arguments to the log function to log and print to console with setting for LogLevel::ERRORR
 		 * 
@@ -110,6 +117,13 @@ namespace Hegemonic
 		void logError(Arg aArg, Args... aArgs)
 		{
 			log(LogLevel::ERRORR, aArg, aArgs...);
+			nextLine();
+		}
+
+		template<typename Arg>
+		void logError(std::initializer_list<Arg> aList)
+		{
+			log(LogLevel::ERRORR, aList);
 			nextLine();
 		}
 
@@ -127,6 +141,14 @@ namespace Hegemonic
 			nextLine();
 		}
 
+		template<typename Arg>
+		void logWarning(std::initializer_list<Arg> aList)
+		{
+			if (!mLogSettings.logWarning) { return; };
+			log(LogLevel::WARNING, aList);
+			nextLine();
+		}
+
 		/**
 		 * INFO: logInfo is responsible for passing passing arguments to the log function to log and print to console with setting for LogLevel::INFO
 		 * 
@@ -138,6 +160,14 @@ namespace Hegemonic
 		{
 			if (!mLogSettings.logInfo) { return; };
 			log(LogLevel::INFO, aArg, aArgs...);
+			nextLine();
+		}
+
+		template<typename Arg>
+		void logInfo(std::initializer_list<Arg> aList)
+		{
+			if (!mLogSettings.logInfo) { return; };
+			log(LogLevel::INFO, aList);
 			nextLine();
 		}
 
@@ -155,6 +185,14 @@ namespace Hegemonic
 			nextLine();
 		}
 
+		template<typename Arg>
+		void logDebug(std::initializer_list<Arg> aList)
+		{
+			if (!mLogSettings.logDebug) { return; };
+			log(LogLevel::DEBUG, aList);
+			nextLine();
+		}
+
 		/**
 		 * INFO: logTrace is responsible for passing passing arguments to the log function to log and print to console with setting for LogLevel::TRACE
 		 * 
@@ -166,6 +204,14 @@ namespace Hegemonic
 		{
 			if (!mLogSettings.logTrace) { return; };
 			log(LogLevel::TRACE, aArg, aArgs...);
+			nextLine();
+		}
+
+		template<typename Arg>
+		void logTrace(std::initializer_list<Arg> aList)
+		{
+			if (!mLogSettings.logTrace) { return; };
+			log(LogLevel::TRACE, aList);
 			nextLine();
 		}
 
@@ -227,6 +273,39 @@ namespace Hegemonic
 
 			mLogData.push_back(ss.str());
 			pushToFile(false);
+		}
+
+		template<typename Arg>
+		void log(LogLevel aLogLevel, std::initializer_list<Arg> aList)
+		{
+			const char* logStrings[6] = { "[FATAL]:   ", "[ERROR]:   ",  "[WARNING]: ",  "[INFO]:    ",  "[DEBUG]:   ",  "[TRACE]:   " };
+			bool isError = convertLogEnumToInt(aLogLevel) < 2;
+
+			std::stringstream ss;
+			ss << logStrings[convertLogEnumToInt(aLogLevel)];
+
+			log(ss, aList);
+
+			if (isError)
+			{
+				writeErrorMessageToPlatform(ss.str().c_str(), convertLogEnumToInt(aLogLevel));
+			}
+			else
+			{
+				writeMessageToPlatform(ss.str().c_str(), convertLogEnumToInt(aLogLevel));
+			}
+
+			mLogData.push_back(ss.str());
+			pushToFile(false);
+		}
+
+		template<typename Arg>
+		void log(std::stringstream& aStringStream, std::initializer_list<Arg> aList)
+		{
+			for (Arg l : aList)
+			{
+				log(aStringStream, l);
+			}
 		}
 
 		/**
@@ -309,6 +388,12 @@ namespace Hegemonic
 		LogInterface::getInstance().logFatal(aArg, aArgs...);
 	}
 
+	template<typename Arg>
+	void logFatal(std::initializer_list<Arg> aList)
+	{
+		LogInterface::getInstance().logFatal(aList);
+	}
+
 	/**
 	 * INFO: logError is responsible for passing passing arguments to the log function to log and print to console with setting for LogLevel::ERRORR
 	 * 		 PassThrough so LogInterface singleton doesn't have to be called directly
@@ -320,6 +405,12 @@ namespace Hegemonic
 	void logError(Arg aArg, Args... aArgs)
 	{
 		LogInterface::getInstance().logError(aArg, aArgs...);
+	}
+
+	template<typename Arg>
+	void logError(std::initializer_list<Arg> aList)
+	{
+		LogInterface::getInstance().logError(aList);
 	}
 
 	/**
@@ -335,6 +426,12 @@ namespace Hegemonic
 		LogInterface::getInstance().logWarning(aArg, aArgs...);
 	}
 
+	template<typename Arg>
+	void logWarning(std::initializer_list<Arg> aList)
+	{
+		LogInterface::getInstance().logWarning(aList);
+	}
+
 	/**
 	 * INFO: logInfo is responsible for passing passing arguments to the log function to log and print to console with setting for LogLevel::INFO
 	 * 		 PassThrough so LogInterface singleton doesn't have to be called directly
@@ -346,6 +443,12 @@ namespace Hegemonic
 	void logInfo(Arg aArg, Args... aArgs)
 	{
 		LogInterface::getInstance().logInfo(aArg, aArgs...);
+	}
+
+	template<typename Arg>
+	void logInfo(std::initializer_list<Arg> aList)
+	{
+		LogInterface::getInstance().logInfo(aList);
 	}
 
 	/**
@@ -361,6 +464,12 @@ namespace Hegemonic
 		LogInterface::getInstance().logDebug(aArg, aArgs...);
 	}
 
+	template<typename Arg>
+	void logDebug(std::initializer_list<Arg> aList)
+	{
+		LogInterface::getInstance().logDebug(aList);
+	}
+
 	/**
 	 * INFO: logTrace is responsible for passing passing arguments to the log function to log and print to console with setting for LogLevel::TRACE
 	 * 		 PassThrough so LogInterface singleton doesn't have to be called directly
@@ -372,6 +481,12 @@ namespace Hegemonic
 	void logTrace(Arg aArg, Args... aArgs)
 	{
 		LogInterface::getInstance().logTrace(aArg, aArgs...);
+	}
+
+	template<typename Arg>
+	void logTrace(std::initializer_list<Arg> aList)
+	{
+		LogInterface::getInstance().logTrace(aList);
 	}
 
 	/**
