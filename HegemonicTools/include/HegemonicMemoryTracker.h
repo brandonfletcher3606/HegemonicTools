@@ -46,23 +46,23 @@ namespace Hegemonic
 		MemoryTracker() = default;
 	};
 
-	// static std::string convertCountToString(size_t aSize)
-	// {
-	// 	const int kb = 1000;
-	// 	const int mb = 1000 * kb;
-	// 	const int gb = 1000 * mb;
-	// 	if (aSize > gb)
-	// 	{
-	// 		return std::to_string(aSize / gb) + "GB";
-	// 	}
-	// 	else if (aSize > mb)
-	// 	{
-	// 		return std::to_string(aSize / mb) + "MB";
-	// 	}
-	// 	else if (aSize > kb)
-	// 	{
-	// 		return std::to_string(aSize / kb) + "KB";
-	// 	}
-	// 	return std::to_string(aSize) + "B";
-	// }
+	static std::string convertCountToString(size_t aSize)
+	{
+		const int kb = 1000;
+		const int mb = 1000 * kb;
+		const int gb = 1000 * mb;
+		if (aSize > gb)
+		{
+			return std::to_string(aSize / gb) + "GB";
+		}
+		else if (aSize > mb)
+		{
+			return std::to_string(aSize / mb) + "MB";
+		}
+		else if (aSize > kb)
+		{
+			return std::to_string(aSize / kb) + "KB";
+		}
+		return std::to_string(aSize) + "B";
+	}
 }
