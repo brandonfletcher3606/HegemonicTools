@@ -57,4 +57,20 @@ namespace Hegemonic
 		}
 		return total;
 	}
+
+	std::vector<std::string> MemoryTracker::getTags()
+	{
+		std::vector<std::string> keys;
+		if (mData.size() == 0)
+		{
+			return keys;
+		}
+
+		keys.reserve(mData.size());
+		for (const auto& pair : mData)
+		{
+			keys.push_back(pair.first);
+		}
+		return keys;
+	}
 }

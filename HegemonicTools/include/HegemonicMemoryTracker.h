@@ -4,6 +4,7 @@
 #include <string>
 #include <utility>
 #include <unordered_map>
+#include <vector>
 
 #include "HegemonicToolsDefines.h"
 
@@ -34,6 +35,7 @@ namespace Hegemonic
 		void incrimentUp(size_t aSize, std::string aTag);
 		void incrimentDown(size_t aSize, std::string aTag);
 		bool isTag(std::string aTag);
+		std::vector<std::string> getTags();
 		int getCount(std::string aTag);
 		int getTotal();
 
