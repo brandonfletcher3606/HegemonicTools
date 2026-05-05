@@ -10,41 +10,21 @@ namespace Hegemonic
     class HEXPORT_TOOLS TimeManager
     {
     public:
-        TimeManager() {mLastTime = mClock::now();};
+        TimeManager();
+
         ~TimeManager() = default;
 
-        void setFrequency(std::size_t aFrequency) { mFrequency = aFrequency; mLastTime = mClock::now();};
+        void setFrequency(std::size_t aFrequency);
 
-        void update()
-        {
-            mClock::time_point currentTime = mClock::now();
-            double dt = std::chrono::duration_cast<std::chrono::microseconds>(currentTime - mLastTime).count();
-            
-            mRunningTime = dt/1000000.0;
-        }
+        void update();
 
-        bool isPassTime()
-        {
-            bool test = mRunningTime >= (1.0/static_cast<double>(mFrequency)) ? true : false;
-            if (test)
-            {
-                mLastRunningTime = mRunningTime;
-                mRunningTime = 0;
-                mLastTime = mClock::now();
-            }
-            return test;
-        }
+        bool isPassTime();
 
-        bool updateAndPeek()
-        {
-            update();
-            return isPassTime();;
-        }
+        bool updateAndPeek();
 
-        float getDt()
-        {
-            return static_cast<float>(mLastRunningTime);
-        }
+        float getDt();
+
+        float getFrequency();
 
     private:
         using mClock = std::conditional_t<std::chrono::high_resolution_clock::is_steady,
