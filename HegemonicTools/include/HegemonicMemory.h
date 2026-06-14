@@ -43,7 +43,7 @@ namespace Hegemonic
     template<typename T, typename... Args>
     std::unique_ptr<T> makeUnique(std::string aTag, Args &&... args)
     {
-        return std::unique_ptr<T>(memget<T, Args>(aTag));
+        return std::unique_ptr<T>(memget<T>(aTag, args...));
     }
 
     template<typename T, typename... Args>
@@ -55,7 +55,7 @@ namespace Hegemonic
     template<typename T, typename... Args>
     std::shared_ptr<T> makeShared(std::string aTag, Args &&... args)
     {
-        return std::shared_ptr<T>(memget<T, Args>(aTag));
+        return std::shared_ptr<T>(memget<T>(aTag, args...));
     }
 
     HEXPORT_TOOLS void* memzero(void* aBlock, u64 aSizeOf);
